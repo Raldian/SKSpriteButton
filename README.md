@@ -9,12 +9,12 @@ I designed it for the iPad and have not tested it for the iPhone so some work mi
 ## How do i use it?
 
 Firstly you need to import the SKSpriteButton file
-```
+``` objc
 #import "SKSpriteButton.h"
 ```
 
 And then you insert the button like this
-```
+``` objc
 SKSpriteButton *btn = [[SKSpriteButton alloc] initWithType:1 label:@"The label text."];
 
 //Set the position for the button
@@ -26,7 +26,7 @@ btn.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
 ```
 
 And to detect the button click you can use something like this
-```
+``` objc
 In -(void)touchesBegan
 
 UITouch *touch = [touches anyObject];
