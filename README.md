@@ -2,7 +2,8 @@
 
 ## What is this?
 
-This is just a "simple" button script i made to allow buttons with a texture to be set on the screen without the texture getting streached.
+I needed a button API for sprite kit and found nothing, so this is just a small button API i made for my game.
+Hope it can help some other people who need something like this.
 
 ## How do i use it?
 
@@ -14,11 +15,11 @@ Firstly you need to import the SKSpriteButton file
 And then you insert the button like this
 ``` objc
 SKSpriteButton *btn = [SKSpriteButton buttonNodeWithType:1
-                                                  label:NSLocalizedString(@"The label text.", nil)
-                                                  block:^(id buttonNode){
-                                                      //Something to do like:
-                                                      [self handleStuff];
-                                                  }];
+label:NSLocalizedString(@"The label text.", nil)
+block:^(id buttonNode){
+    //Something to do like:
+    [self handleStuff];
+}];
 
 //Type 1
 //Set the position for the button
