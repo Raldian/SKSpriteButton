@@ -2,7 +2,8 @@
 
 @interface SKSpriteButton : SKSpriteNode
 
--(SKSpriteButton *) initWithType:(NSUInteger) type
-                   label:(NSString *) txt;
++ (instancetype) buttonNodeWithType:(NSUInteger) type
+                              label:(NSString *) txt
+                              block:(void(^)(id buttonNode))block;
 
 @end
