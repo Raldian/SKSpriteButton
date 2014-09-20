@@ -1,5 +1,4 @@
 #import "SKSpriteButton.h"
-#import "Constants.h"
 
 typedef void (^SKSpriteButtonNodeSelectedBlock)(SKSpriteButton *buttonNode);
 
