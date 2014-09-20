@@ -20,8 +20,15 @@ SKSpriteButton *btn = [SKSpriteButton buttonNodeWithType:1
                                                       [self handleStuff];
                                                   }];
 
+//Type 1
 //Set the position for the button
 btn.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+
+//Type 2 btn 1
+btn.position = CGPointMake(CGRectGetMidX(self.frame)/2, CGRectGetMidY(self.frame));
+
+//Type 2 btn 2
+btn.position = CGPointMake(CGRectGetMidX(self.frame)*1.5, CGRectGetMidY(self.frame));
 
 //Insert it to the view
 [self addChild:btn];
