@@ -1,4 +1,5 @@
 #import "SKSpriteButton.h"
+#define IS_IPHONE ([[[UIDevice currentDevice] model] isEqualToString:@"iPhone"] || [[[UIDevice currentDevice] model] isEqualToString:@"iPhone Simulator"])
 
 typedef void (^SKSpriteButtonNodeSelectedBlock)(SKSpriteButton *buttonNode);
 
