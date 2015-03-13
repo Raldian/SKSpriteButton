@@ -7,47 +7,43 @@ typedef void (^SKSpriteButtonNodeSelectedBlock)(SKSpriteButton *buttonNode);
     @property (nonatomic, copy) SKSpriteButtonNodeSelectedBlock selectedBlock;
 
     @property (nonatomic, assign) BOOL isSelected;
+    
+    @property (nonatomic, strong) SKLabelNode *labelNode;
 @end
 
 @implementation SKSpriteButton
 
 + (instancetype)buttonNodeWithType:(NSUInteger)type label:(NSString *)txt block:(void (^)(id))block{
-    return [[self alloc] initButtonNodeWithType:type label:txt block:block];
+    return [[self alloc] initButtonNodeWithType:type image:[SKTexture textureWithImageNamed:@"button"] label:txt block:block];
 }
 
-- (instancetype)initButtonNodeWithType:(NSUInteger)type label:(NSString *)txt block:(void (^)(id))block{
-    
-    self = [super initWithTexture:[SKTexture textureWithImageNamed:@"button"]];
++ (instancetype)buttonNodeWithType:(NSUInteger)type image:(SKTexture *)texture label:(NSString *)txt block:(void (^)(id))block{
+    return [[self alloc] initButtonNodeWithType:type image:texture label:txt block:block];
+}
+
+- (instancetype)initButtonNodeWithType:(NSUInteger)type image:(SKTexture *)texture label:(NSString *)txt block:(void (^)(id))block{
+    self = [super initWithTexture:texture];
     if(self){
         _selectedBlock = block;
         self.userInteractionEnabled = YES;
-        
-        self.centerRect = CGRectMake(20.0/40.0, 20.0/40.0, 5.0/40.0, 5.0/40.0);
+        float _h = texture.size.height;
+        float _w = texture.size.width;
+        self.centerRect = CGRectMake((_h/2)/_h, (_h/2)/_h, 2/_w, 2/_h);
         self.name = txt;
         
         switch (type) {
             case 1:
-                self.xScale = [[UIScreen mainScreen] bounds].size.width/41;
+                self.xScale = [[UIScreen mainScreen] bounds].size.width/_w-.1;
                 self.yScale = (self.size.height+20)/(IS_IPHONE ? 65 : 40);
                 break;
                 
             case 2:
-                self.xScale = ([[UIScreen mainScreen] bounds].size.width/42)/2;
-                self.yScale = (self.size.height+20)/(IS_IPHONE ? 65 : 40);
-                break;
-                
-            case 3:
-                self.xScale = [[UIScreen mainScreen] bounds].size.height/(IS_IPHONE ? 65 : 55);
-                self.yScale = (self.size.height)/(IS_IPHONE ? 65 : 20);
-                break;
-                
-            case 4:
-                self.xScale = ([[UIScreen mainScreen] bounds].size.width/42)/2;
+                self.xScale = ([[UIScreen mainScreen] bounds].size.width/_w)/2-.1;
                 self.yScale = (self.size.height+20)/(IS_IPHONE ? 65 : 40);
                 break;
                 
             default:
-                self.xScale = ([txt length]*20)/(IS_IPHONE ? 65 : 40);
+                self.xScale = [[UIScreen mainScreen] bounds].size.width/_w-.1;
                 self.yScale = (self.size.height+20)/(IS_IPHONE ? 65 : 40);
                 break;
         }
@@ -56,17 +52,21 @@ typedef void (^SKSpriteButtonNodeSelectedBlock)(SKSpriteButton *buttonNode);
         label.text = txt;
         label.name = txt;
         
-        label.yScale = 30/self.size.height;
-        label.xScale = 30/self.size.width;
+        label.yScale = (_h/1.5)/self.size.height;
+        label.xScale = (_w/1.5)/self.size.width;
         
         label.fontSize = self.size.height - (IS_IPHONE ? 7.5 : 0);
-        
-        label.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMaxY(self.frame) - self.size.height/2 - label.frame.size.height/2);
+        label.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMaxY(self.frame) - self.size.height/2 - label.frame.size.height/2+2);
         
         [self addChild:label];
+        _labelNode = label;
     }
     
     return self;
+}
+
+- (void)changeButtonLabel:(NSString *)label{
+    _labelNode.text = label;
 }
 
 - (void)selected{
